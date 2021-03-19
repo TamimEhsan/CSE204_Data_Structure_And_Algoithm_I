@@ -13,7 +13,6 @@ public class Array {
         stringArray = new String[PREDEFINED_SIZE];
         elements = 0;
         arraySize = PREDEFINED_SIZE;
-        System.out.println(stringArray.length);
     }
     public Array(int size){
         elements = 0;
@@ -30,7 +29,7 @@ public class Array {
         return Arrays.copyOfRange(stringArray, 0, elements);
     }
     public String getAnElement(int index) throws IndexOutOfBoundsException{
-        if( index>=elements ){
+        if( index<0 || index>=elements ){
             throw new IndexOutOfBoundsException();
         } else{
             return stringArray[index];
@@ -38,14 +37,14 @@ public class Array {
     }
     public void add(String string){
         if( elements == arraySize ){
-            arraySize = arraySize*2;
+            arraySize = arraySize*2+1;
             stringArray = Arrays.copyOf(stringArray, arraySize);
         }
         stringArray[elements] = string;
         elements++;
     }
     public void add(int index,String string) throws IndexOutOfBoundsException{
-        if( index>=elements ){
+        if( index<0 || index>=elements ){
             throw new IndexOutOfBoundsException();
         } else{
             stringArray[index] = string;
@@ -60,6 +59,10 @@ public class Array {
             }
         }
         elements = index;
+        if( 2*elements<=arraySize ){
+            arraySize = elements;
+            stringArray = Arrays.copyOf(stringArray, arraySize);
+        }
     }
     public int[] findIndex(String string){
         int[] indexes = new int[elements];
@@ -106,7 +109,6 @@ public class Array {
         return elements;
     }
     public boolean isEmpty(){
-        if( elements == 0 ) return true;
-        else return false;
+        return elements == 0;
     }
 }
