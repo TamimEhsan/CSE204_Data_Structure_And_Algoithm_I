@@ -6,17 +6,17 @@ public class StringProcessor {
     private String string;
     public String newString;
     private int size;
-    private int a = (int)'a';
-    public StringProcessor(String string){
+
+    public StringProcessor(String string) {
         this.string = string;
         size = string.length();
         letters = new int[26];
-        newString="";
+        newString = "";
         queue = new Queue();
     }
 
-    public void process(){
-        for(int i=0;i<size;i++) {
+    public void process() {
+        for (int i = 0; i < size; i++) {
             char c = string.charAt(i);
             letters[getValue(c)]++;
             queue.push(c);
@@ -31,10 +31,12 @@ public class StringProcessor {
 
         }
     }
-    public String getNewString(){
+
+    public String getNewString() {
         return newString;
     }
-    private int getValue(char c){
-        return (int)c - (int)'a';
+
+    private int getValue(char c) {
+        return (int) c - (int) 'a';
     }
 }
