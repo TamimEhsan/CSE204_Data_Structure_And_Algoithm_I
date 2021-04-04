@@ -9,25 +9,23 @@ public class Stack<T> {
 
     /**
      * returns the topmost element of the stack if exists
-     *
      * @return
      */
-    public T top() {
-        if (head == null) return null;
+    public T top(){
+        if( head == null ) return null;
         return head.getValue();
     }
 
     /**
      * Adds value to the top of stack
-     *
      * @param value
      */
-    public void push(T value) {
-        if (size == 0) {
-            Node<T> node = new Node<T>(value, null);
+    public void push(T value){
+        if( size == 0 ){
+            Node<T> node = new Node<T>(value,null);
             head = node;
-        } else {
-            Node<T> node = new Node<T>(value, head);
+        } else{
+            Node<T> node = new Node<T>(value,head);
             head = node;
         }
         size++;
@@ -36,8 +34,8 @@ public class Stack<T> {
     /**
      * takes out the topmost element of the stack if it exists
      */
-    public void pop() {
-        if (size != 0) {
+    public void pop(){
+        if( size != 0 ){
             head = head.getNext();
             size--;
         }
@@ -45,19 +43,17 @@ public class Stack<T> {
 
     /**
      * Returns the size of the stack
-     *
      * @return size
      */
-    public int size() {
+    public int size(){
         return size;
     }
 
     /**
      * Checks if the stack has any element
-     *
      * @return true if empty
      */
-    public boolean empty() {
+    public boolean empty(){
         return size == 0;
     }
 }

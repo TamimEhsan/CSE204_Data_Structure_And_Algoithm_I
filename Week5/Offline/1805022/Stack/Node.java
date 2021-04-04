@@ -23,7 +23,7 @@ public class Node<T> {
 
     /**
      * Sets value as the value of this node
-     *
+     * 
      * @param value
      */
     public void setValue(T value) {
@@ -32,7 +32,6 @@ public class Node<T> {
 
     /**
      * returns the next value next of current node
-     *
      * @return next
      */
     public Node getNext() {
@@ -41,7 +40,6 @@ public class Node<T> {
 
     /**
      * Sets
-     *
      * @param next
      */
     public void setNext(Node next) {

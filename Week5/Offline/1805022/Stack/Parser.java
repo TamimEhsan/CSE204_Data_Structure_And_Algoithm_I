@@ -12,10 +12,8 @@ public class Parser {
         numberStack = new Stack<>();
         operatorStack = new Stack<>();
     }
-
     /**
      * Checks if the given equation is Invalid or Probably valid.
-     *
      * @param
      * @return false if Invalid, true if probably valid
      */
@@ -25,7 +23,6 @@ public class Parser {
 
     /**
      * Checks if the given equation has a regular bracket sequence
-     *
      * @return
      */
     private boolean checkRBS() {
@@ -44,7 +41,6 @@ public class Parser {
 
     /**
      * Checks if the given equation has a correct syntax
-     *
      * @return true if yes
      */
     private boolean checkSyntax() {
@@ -57,8 +53,8 @@ public class Parser {
             char b = equation.charAt(i - 1);
             if (!isOperator(c) && !isParenthesis(c) && !isDigit(c)) return false; // case: #&%
             if (isOperator(b) && c == ')') return false;                            // case: +)
-            if (isDigit(b) && c == '(') return false;                             // case 8(
-            if (b == ')' && isDigit(c)) return false;                             // case )5
+            if( isDigit(b) && c == '(' ) return false;                             // case 8(
+            if( b == ')' && isDigit(c) ) return false;                             // case )5
             if (b == '(' && isOperator(c) && c != '-') return false;                 // case: (*
             if (isOperator(b) && isOperator(c)) return false;                      // case: *-
             if (isParenthesis(b) && isParenthesis(c) && b != c) return false;       // case: () )(
@@ -70,13 +66,12 @@ public class Parser {
 
     /**
      * Parses the given equation after checking the validity of the expression
-     *
      * @return the computed float value of the equation
      * @throws ArithmeticException if the expression is not valid
      */
-    public float parse() throws ArithmeticException {
+    public float parse() throws ArithmeticException{
         if (!mayBeValid()) throw new ArithmeticException();
-        equation = "(" + equation + ")";
+        equation = "("+equation+")";
         int sz = equation.length();
         float number = 0;
         for (int i = 0; i < sz; i++) {
@@ -90,15 +85,15 @@ public class Parser {
                 float mult = 1;
                 while (i < sz && isDigit(equation.charAt(i))) {
                     ch = equation.charAt(i);
-                    if (ch == '.' && decimal) {
+                    if( ch == '.' && decimal){
                         throw new ArithmeticException();
-                    } else if (ch == '.') {
+                    } else if( ch == '.' ){
                         decimal = true;
-                    } else if (decimal) {
+                    } else if(decimal){
                         int digit = ch - '0';
-                        mult = mult / 10;
-                        number += digit * mult;
-                    } else {
+                        mult = mult/10;
+                        number +=  digit*mult;
+                    }else{
                         int digit = ch - '0';
                         number = number * 10 + digit;
                     }
@@ -147,7 +142,7 @@ public class Parser {
                     if (!numberStack.empty()) {
                         b = numberStack.top();
                         numberStack.pop();
-                    }
+                    } 
                     char c = operatorStack.top();
                     operatorStack.pop();
                     float value = evaluate(b, a, c);
@@ -165,17 +160,15 @@ public class Parser {
 
     /**
      * Checks if character c is a digit from 0 to 9 or a decimal point
-     *
      * @param c
      * @return true if it is a decimal value
      */
     private boolean isDigit(char c) {
-        return (c > 47 && c < 58) || c == '.';
+        return ( c > 47 && c < 58 ) || c == '.';
     }
 
     /**
      * Checks if a given char c is a parenthesis of type ( or )
-     *
      * @param c
      * @return true if c is a parenthesis
      */
@@ -185,17 +178,15 @@ public class Parser {
 
     /**
      * Checks if a character is a operator of type + - * /
-     *
      * @param c
      * @return true if c is a operator
      */
+
     private boolean isOperator(char c) {
         return c == '+' || c == '-' || c == '*' || c == '/';
     }
-
     /**
      * Evaluates the result of a binary expression a # b
-     *
      * @param a First number of the expression
      * @param b Second number of the expression
      * @param c The operator
@@ -212,7 +203,7 @@ public class Parser {
             case '*':
                 return a * b;
             case '/':
-                if (b == 0) throw new ArithmeticException();
+                if( b == 0 ) throw new ArithmeticException();
                 return a / b;
             default:
                 return 0;
@@ -221,11 +212,10 @@ public class Parser {
 
     /**
      * Checks precedence between two operator
-     *
      * @param a The current operator
      * @param b The previous operator
      * @return true if the previous operator preceeds current operator
-     * false otherwise
+     *         false otherwise
      */
     private boolean preceeds(char a, char b) {
         return (a != '+' && a != '-') || (b != '*' && b != '/');
