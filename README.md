@@ -8,3 +8,5 @@
 - Week 8: BFS, DFS
 - Week 9: Merge sort, Quick sort
 - Week 10: Divide and Conquer 
+- Week 11: Greedy
+- Week 12: DP
